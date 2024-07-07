@@ -1,17 +1,17 @@
-import * as reactive from './reactive'
+import { reactive, subscribe } from './topaz'
 
-const firstName = reactive.create('Paul')
-const lastName = reactive.create('Atreides')
+const firstName = reactive('Paul')
+const lastName = reactive('Atreides')
 
-const fullName = reactive.map([firstName, lastName], () => {
+const fullName = subscribe([firstName, lastName], () => {
   return `${firstName.$} ${lastName.$}`
 })
 
-const quote = reactive.map(fullName, () => {
+const quote = subscribe(fullName, () => {
   return `"He who can destroy a thing, controls a thing." - ${fullName.$}`
 })
 
-reactive.map(quote, () => {
+subscribe(quote, () => {
   console.log(`Quote changed: ${quote.$}`)
 })
 
